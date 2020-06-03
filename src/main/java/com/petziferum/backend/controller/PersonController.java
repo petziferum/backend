@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,19 +22,11 @@ public class PersonController {
         return ResponseEntity.ok(list);
     }
 
-    @PostMapping("/newperson")
-    public ResponseEntity<String> addPerson(@RequestBody Person person) {
-        try {
-            String id = person.getId();
-            if (id == null) {
-                Person savedPerson = repo.save(person);
-                return ResponseEntity.created(URI.create(savedPerson.getId())).build();
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
-        }
+    @PostMapping("/post")
+    public ResponseEntity saveOrUpdatePerson(@RequestBody Person person){
+        System.out.println("post Person");
+        repo.save(person);
+        return ResponseEntity.ok(person);
     }
 
     @GetMapping("/persons/{firstName}")

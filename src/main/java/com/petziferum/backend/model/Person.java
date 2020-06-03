@@ -1,17 +1,19 @@
 package com.petziferum.backend.model;
 
+import com.petziferum.backend.repository.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "persons")
 public class Person {
 
-    @Id String id;
-    String firstName;
-    String lastName;
+    @Id private String id;
+    private String firstName;
+    private String lastName;
+
     public Person(String firstName, String lastName){
         this.lastName = lastName;
         this.firstName = firstName;
@@ -40,4 +42,5 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 }
