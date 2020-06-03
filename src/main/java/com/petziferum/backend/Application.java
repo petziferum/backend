@@ -20,7 +20,6 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        System.out.println(repo.findAll().toString());
         repo.deleteAll();
 
         repo.save(new Person("Rick", "Sanchez"));

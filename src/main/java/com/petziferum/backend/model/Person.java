@@ -9,23 +9,12 @@ import java.util.List;
 @Document(collection = "persons")
 public class Person {
 
-    @Id
-    String id;
-    private String firstName;
-    private String lastName;
-    private int age = 0;
-
+    @Id String id;
+    String firstName;
+    String lastName;
     public Person(String firstName, String lastName){
-        this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+        this.firstName = firstName;
     }
 
     public String getId() {
@@ -33,7 +22,7 @@ public class Person {
     }
 
     public void setId(String id) {
-        id = id;
+        this.id = id;
     }
 
     public String getFirstName() {
