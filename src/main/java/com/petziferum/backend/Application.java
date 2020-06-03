@@ -20,11 +20,11 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        repo.deleteAll();
+        /*repo.deleteAll();
 
         repo.save(new Person("Rick", "Sanchez"));
         repo.save(new Person("Morty", "Smith"));
         repo.save(new Person("Jerry", "Smith"));
-
+*/
     }
 }
