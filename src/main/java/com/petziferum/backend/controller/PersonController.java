@@ -32,7 +32,6 @@ public class PersonController {
     @GetMapping("/persons/{firstName}")
      public Person getPerson(@RequestParam(value="firstName", required = false) String firstName, @RequestParam(value="lastName",required = false) String lastName){
         Person p = new Person(firstName, lastName);
-
         return p;
     }
 }
