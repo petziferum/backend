@@ -23,15 +23,15 @@ public class PersonController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity saveOrUpdatePerson(@RequestBody Person person){
-        System.out.println("post Person");
+    public ResponseEntity saveOrUpdatePerson(@RequestBody Person person){ //erwartet ein Person Object
+        System.out.println("post Person: " + person.getFirstName() + " " + person.getLastName());
         repo.save(person);
         return ResponseEntity.ok(person);
     }
 
     @GetMapping("/persons/{firstName}")
      public Person getPerson(@RequestParam(value="firstName", required = false) String firstName, @RequestParam(value="lastName",required = false) String lastName){
-        Person p = new Person(firstName, lastName);
+        Person p = new Person(firstName, lastName, 0);
         return p;
     }
 }
