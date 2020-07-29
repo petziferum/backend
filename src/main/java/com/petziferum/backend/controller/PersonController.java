@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-public class PersonController {
+public class PersonController  {
 
     @Autowired
     PersonRepository repo;
@@ -24,7 +24,7 @@ public class PersonController {
 
     @PostMapping("/post")
     public ResponseEntity saveOrUpdatePerson(@RequestBody Person person){ //erwartet ein Person Object
-        System.out.println("post Person: " + person.getFirstName() + " " + person.getLastName());
+        System.out.println("post Person: " + person.getFirstName() + " " + person.getLastName() + " Id: " + person.getId());
         repo.save(person);
         return ResponseEntity.ok(person);
     }

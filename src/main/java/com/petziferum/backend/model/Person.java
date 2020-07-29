@@ -8,22 +8,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Document(collection = "persons")
-public class Person {
+public class Person extends BaseEntity{
 
-    @Id private String id;
-    private String firstName;
-    private String lastName;
+
     private int age;
+    private Skills skills;
 
-    public Person(String firstName, String lastName, int age){
-        this.lastName = lastName;
-        this.firstName = firstName;
+    public Person(String firstName, String lastName, int age, Skills skills){
+        super(firstName, lastName);
         this.age = age;
-    }
-    static Person createNewPerson (Person person) {
-        return new Person(
-        person.firstName, person.lastName, person.age
-        );
+        this.skills = skills;
     }
 
     public int getAge() {
@@ -32,30 +26,6 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
 }
