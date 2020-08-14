@@ -1,24 +1,45 @@
 package com.petziferum.backend.model;
 
-import com.petziferum.backend.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 
 @Document(collection = "persons")
-public class Person extends BaseEntity{
+public class Person {
 
 
+
+    @Id
+    private String id;
     private int age;
-    private Skills skills;
+    private final String firstName;
+    private final String lastName;
+    private final Skills skills;
 
     public Person(String firstName, String lastName, int age, Skills skills){
-        super(firstName, lastName);
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.skills = skills;
     }
+    public String getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public Skills getSkills() {
+        return skills;
+    }
+
 
     public int getAge() {
             return age;
@@ -26,6 +47,10 @@ public class Person extends BaseEntity{
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public static Person saveNewPerson(Person person){
+        return new Person(person.firstName, person.lastName, person.age, person.skills);
     }
 
 }

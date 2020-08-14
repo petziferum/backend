@@ -1,10 +1,16 @@
 package com.petziferum.backend.controller;
 
+
+import com.petziferum.backend.model.Building;
 import com.petziferum.backend.model.Person;
+import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -14,6 +20,14 @@ public class PersonController  {
 
     @Autowired
     PersonRepository repo;
+    @Autowired
+    ConstructionRepo crepo;
+
+    @GetMapping("/allitems")
+    public ResponseEntity getConstructionItems() {
+        List<Building> clist = crepo.findAll();
+                return ResponseEntity.ok(clist);
+    }
 
 
     @GetMapping("/persons")
@@ -22,16 +36,10 @@ public class PersonController  {
         return ResponseEntity.ok(list);
     }
 
-    @PostMapping("/post")
-    public ResponseEntity saveOrUpdatePerson(@RequestBody Person person){ //erwartet ein Person Object
-        System.out.println("post Person: " + person.getFirstName() + " " + person.getLastName() + " Id: " + person.getId());
-        repo.save(person);
-        return ResponseEntity.ok(person);
-    }
-
-    @GetMapping("/persons/{firstName}")
-     public Person getPerson(@RequestParam(value="firstName", required = false) String firstName, @RequestParam(value="lastName",required = false) String lastName){
-        Person p = new Person(firstName, lastName, 0);
-        return p;
+    @PostMapping("/savePerson")
+    public ResponseEntity postPerson(@RequestBody Person person){ //erwartet ein Person Object
+        System.out.println(person);
+        repo.save(Person.saveNewPerson(person));
+        return ResponseEntity.ok("person gespeichert: " + person);
     }
 }

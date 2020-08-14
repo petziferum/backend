@@ -1,6 +1,7 @@
 package com.petziferum.backend;
 
-import com.petziferum.backend.model.Person;
+import com.petziferum.backend.configuration.InitService;
+import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,7 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    private PersonRepository repo;
+    public PersonRepository repo;
+
+    @Autowired
+    public ConstructionRepo crepo;
+
+    @Autowired
+    InitService initService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -20,11 +27,9 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*repo.deleteAll();
 
-        repo.save(new Person("Rick", "Sanchez"));
-        repo.save(new Person("Morty", "Smith"));
-        repo.save(new Person("Jerry", "Smith"));
-*/
+        initService.Init();
+
+
     }
 }
