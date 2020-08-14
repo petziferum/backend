@@ -10,10 +10,20 @@ public class Building {
     private String id;
     private String name;
     private ConstructionIdentifier constructionIdentifier;
+    private Damage damage;
 
-    public Building(String name, ConstructionIdentifier constructionIdentifier) {
+    public Building(String name, ConstructionIdentifier constructionIdentifier, Damage damage) {
         this.name = name;
         this.constructionIdentifier = constructionIdentifier;
+        this.damage = damage;
+    }
+
+    public Damage getDamage() {
+        return damage;
+    }
+
+    public void setDamage(Damage damage) {
+        this.damage = damage;
     }
 
     public String getName() {
