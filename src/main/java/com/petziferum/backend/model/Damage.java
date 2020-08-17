@@ -6,25 +6,26 @@ public class Damage {
 
     @Id
     private String id;
-    private String name;
-    private int level;
+    private String text;
+    private int value;
 
 
 
     public static class Builder {
-        private String name;
-        private int level;
+        private String text;
+        private int value;
 
-        public Builder(String name) {
-            this.name = name;
+        public Builder(String text) {
+            this.text = text;
         }
-        public Builder withLevel(int level) {
+        public Builder withvalue(int value) {
+            this.value = value;
             return this;
         }
         public Damage build() {
             Damage damage = new Damage();
-            damage.name = this.name;
-            damage.level = this.level;
+            damage.text = this.text;
+            damage.value = this.value;
 
             return damage;
 
@@ -33,11 +34,11 @@ public class Damage {
 
     private Damage(){};
 
-    public String getName() {
-        return name;
+    public String gettext() {
+        return text;
     }
 
-    public int getLevel() {
-        return level;
+    public int getvalue() {
+        return value;
     }
 }

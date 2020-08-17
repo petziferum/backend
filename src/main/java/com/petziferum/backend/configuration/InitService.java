@@ -25,17 +25,17 @@ public class InitService {
 
     public void Init() {
 
-       clearRepos();
+       prepo.deleteAll();
 
         Skills skill = new Skills();
         skill.setSkillName("Portal");
         skill.setSkillClass("zaubern");
 
-        Damage ws = new Damage.Builder("Wasserschaden").withLevel(5).build();
+        Damage ws = new Damage.Builder("Wasserschaden").withvalue(5).build();
 
         prepo.save(new Person("Rick", "Sanchez", 100, skill));
 
-        ConstructionIdentifier ci = new ConstructionIdentifier("Aschheimer Brunnen", "Ein alter dreckiger Brunnen", "200kk39", new Person("Gerhard", "Brunzler", 200, null));
+        ConstructionIdentifier ci = new ConstructionIdentifier("Aschheimer Brunnen", "Ein alter dreckiger Brunnen", "200kk39", new Person("Gerhard", "Brunzler", 200, skill));
         Building c = new Building("Bauwerk", ci, ws);
 
         crepo.save(c);

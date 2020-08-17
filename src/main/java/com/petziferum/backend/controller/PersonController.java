@@ -29,6 +29,13 @@ public class PersonController  {
                 return ResponseEntity.ok(clist);
     }
 
+    @PostMapping("/saveConstructionItem")
+    public ResponseEntity saveNewConstructionItem(@RequestBody Building building){
+        System.out.print(building);
+        crepo.save(building);
+        return ResponseEntity.ok("Bauwerk gespeichert " + building);
+    };
+
 
     @GetMapping("/persons")
     public ResponseEntity getAllPersons(){
