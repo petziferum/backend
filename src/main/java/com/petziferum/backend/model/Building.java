@@ -3,6 +3,8 @@ package com.petziferum.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+
 @Document(collection = "constructionitems")
 public class Building {
 
@@ -10,20 +12,16 @@ public class Building {
     private String id;
     private String name;
     private ConstructionIdentifier constructionIdentifier;
-    private Damage damage;
+    private ArrayList<Damage> damages;
 
-    public Building(String name, ConstructionIdentifier constructionIdentifier, Damage damage) {
+    public Building(String name, ConstructionIdentifier constructionIdentifier, ArrayList<Damage> damages) {
         this.name = name;
         this.constructionIdentifier = constructionIdentifier;
-        this.damage = damage;
+        this.damages = damages;
     }
 
-    public Damage getDamage() {
-        return damage;
-    }
-
-    public void setDamage(Damage damage) {
-        this.damage = damage;
+    public ArrayList<Damage> getDamages() {
+        return damages;
     }
 
     public String getName() {

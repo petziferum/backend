@@ -3,6 +3,8 @@ package com.petziferum.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+
 
 @Document(collection = "persons")
 public class Person {
@@ -14,9 +16,9 @@ public class Person {
     private int age;
     private final String firstName;
     private final String lastName;
-    private final Skills skills;
+    private ArrayList<Skills> skills;
 
-    public Person(String firstName, String lastName, int age, Skills skills){
+    public Person(String firstName, String lastName, int age, ArrayList<Skills> skills){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -35,11 +37,9 @@ public class Person {
         return lastName;
     }
 
-
-    public Skills getSkills() {
+    public ArrayList<Skills> getSkills() {
         return skills;
     }
-
 
     public int getAge() {
             return age;
@@ -51,6 +51,9 @@ public class Person {
 
     public static Person saveNewPerson(Person person){
         return new Person(person.firstName, person.lastName, person.age, person.skills);
+    }
+    public void addSkill(Skills skills) {
+        this.skills.add(skills);
     }
 
 }
