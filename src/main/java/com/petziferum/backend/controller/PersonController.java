@@ -7,10 +7,7 @@ import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,17 @@ public class PersonController  {
         crepo.save(building);
         return ResponseEntity.ok("Bauwerk gespeichert " + building);
     };
+
+    @GetMapping("/age")
+    public ResponseEntity getDepotValue(@RequestBody int age){
+        List<Person> ageList = repo.findByAge(age);
+        return ResponseEntity.ok(ageList);
+    }
+    @GetMapping("/lastname")
+    public ResponseEntity getPersonByLastName(@RequestParam String lastname){
+        List<Person> PersonList = repo.findByLastName(lastname);
+        return ResponseEntity.ok(PersonList);
+    }
 
 
     @GetMapping("/persons")
