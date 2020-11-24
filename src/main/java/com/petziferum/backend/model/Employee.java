@@ -12,14 +12,15 @@ public class Employee {
 
     @Id
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String role;
 
     Employee() {}
 
-    public Employee(String name, String role) {
+    public Employee(String firstName, String role) {
 
-        this.name = name;
+        this.firstName = firstName;
         this.role = role;
     }
 
@@ -27,8 +28,16 @@ public class Employee {
         return this.id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getfirstName() {
+        return this.firstName;
     }
 
     public String getRole() {
@@ -39,8 +48,8 @@ public class Employee {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setRole(String role) {
@@ -55,17 +64,17 @@ public class Employee {
         if (!(o instanceof Employee))
             return false;
         Employee employee = (Employee) o;
-        return Objects.equals(this.id, employee.id) && Objects.equals(this.name, employee.name)
+        return Objects.equals(this.id, employee.id) && Objects.equals(this.firstName, employee.firstName)
                 && Objects.equals(this.role, employee.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.role);
+        return Objects.hash(this.id, this.firstName, this.role);
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.role + '\'' + '}';
+        return "Employee{" + "id=" + this.id + ", firstName='" + this.firstName + '\'' + ", role='" + this.role + '\'' + '}';
     }
 }

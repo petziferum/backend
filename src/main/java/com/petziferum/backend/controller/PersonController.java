@@ -34,7 +34,7 @@ public class PersonController  {
     };
 
     @GetMapping("/age")
-    public ResponseEntity getDepotValue(@RequestBody int age){
+    public ResponseEntity getDepotValue(@RequestParam int age){
         List<Person> ageList = repo.findByAge(age);
         return ResponseEntity.ok(ageList);
     }
