@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@CrossOrigin(value = {"http://localhost:8080", "http://localhost:8010"})
 @RestController
 public class PersonController  {
 
@@ -19,7 +19,7 @@ public class PersonController  {
     PersonRepository repo;
     @Autowired
     ConstructionRepo crepo;
-
+    @CrossOrigin(value = {"http://localhost:8080", "http://localhost:8010"})
     @GetMapping("/allitems")
     public ResponseEntity getConstructionItems() {
         List<Building> clist = crepo.findAll();
