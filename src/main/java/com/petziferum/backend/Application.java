@@ -29,8 +29,11 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        //initService.Init();
-
+        /*
+        initService.clearRepos();
+        initService.answers();
+        initService.Init();
+        initService.initPerson();
+        */
     }
 }
