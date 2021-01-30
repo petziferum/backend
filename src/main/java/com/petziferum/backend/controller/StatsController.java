@@ -15,18 +15,21 @@ public class StatsController {
     @Autowired
     StatsRepo statsrepo;
 
-    @PostMapping("/setcounter")
-    public ResponseEntity setCounter(@RequestBody PageStats pagestats){
-        System.out.println(pagestats);
-        statsrepo.save(pagestats);
-        return ResponseEntity.ok("Neuer Counter gespeichert: " + pagestats);
+    @PostMapping("/setstats")
+    public ResponseEntity setCounter(@RequestBody Object version){
+        PageStats counter = statsrepo.findByName("counter");
+        counter.saveversion(version);
+        counter.increment();
+        counter.saveDate();
+        System.out.println("neuer Counter " +counter.getVersion() +" " + counter.getCounter());
+        statsrepo.save(counter);
+        return ResponseEntity.ok(counter);
     }
 
     @GetMapping("/")
     public ResponseEntity getCounter(){
         PageStats counter = statsrepo.findByName("counter");
-        counter.increment();
-        counter.saveDate();
+
         statsrepo.save(counter);
         return ResponseEntity.ok(counter);
     }

@@ -11,29 +11,33 @@ public class PageStats {
     @Id
     String id;
     String name;
-    String lastedited;
+    String modified;
+    Object version;
     private int counter;
 
-    public PageStats(String name, String lastedited, int counter) {
+    public PageStats(String name, String modified, int counter) {
             this.name = name;
             this.counter = counter;
-            this.lastedited = lastedited;
+            this.modified = modified;
     }
 
     public void increment(){
         counter++;
     }
 
-    public void decrement() {
-        counter--;
+    public void saveversion(Object versionstring) {
+        System.out.println("version" + versionstring);
+        version = versionstring;
     }
 
     public void saveDate() {
         Date heute = new Date();
         System.out.println("heute "+ heute);
-        lastedited = heute.toString();
+        modified = heute.toString();
     }
-
+    public Object getVersion() {
+        return version;
+    }
     public String getName() {
         return name;
     }
@@ -46,12 +50,12 @@ public class PageStats {
         return id;
     }
 
-    public String getLastedited() {
-        return lastedited;
+    public String getmodified() {
+        return modified;
     }
 
-    public void setLastedited(String lastedited) {
-        this.lastedited = lastedited;
+    public void setmodified(String modified) {
+        this.modified = modified;
     }
 
     public int getCounter() {

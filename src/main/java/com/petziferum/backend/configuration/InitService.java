@@ -1,13 +1,12 @@
 package com.petziferum.backend.configuration;
 
 
-import com.petziferum.backend.model.*;
+import com.petziferum.backend.model.tree.Question;
 import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
+import com.petziferum.backend.repository.tree.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class InitService {
@@ -18,6 +17,9 @@ public class InitService {
     public PersonRepository prepo;
     @Autowired
     public ConstructionRepo crepo;
+    @Autowired
+    public NodeRepository noderepo;
+
 
         public void clearRepos() {
 
@@ -26,8 +28,12 @@ public class InitService {
         }
 
     public void Init() {
+            noderepo.deleteAll();
+            String[] p = {null};
+            Question q = new Question("erste Frage", "Wie kann ich dir helfen?","Beginn",p,false );
+            noderepo.save(q);
 
-
+/*
         Skills skill = new Skills();
         skill.setSkillName("Portal");
         skill.setSkillClass("zaubern");
@@ -45,6 +51,9 @@ public class InitService {
 
         prepo.save(rick);
         crepo.save(c);
+
+ */
+
 
     }
 }
