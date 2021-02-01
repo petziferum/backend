@@ -1,6 +1,5 @@
 package com.petziferum.backend;
 
-import com.petziferum.backend.configuration.InitService;
 import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -19,10 +18,10 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     public ConstructionRepo crepo;
-
+/*
     @Autowired
     InitService initService;
-
+*/
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

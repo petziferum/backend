@@ -8,14 +8,24 @@ public class Answer extends Node implements Comparable<Answer>{
     private List<String> competencies;
     private String justify = "end";
     private int index;
+    private String type;
 
     public Answer(String name, String text, String description, String[] parents,
                   List<String> competencies, int index) {
         super(name, description, parents);
 
+        this.type ="User";
         this.competencies = competencies;
         this.text = text;
         this.index = index;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getText() {

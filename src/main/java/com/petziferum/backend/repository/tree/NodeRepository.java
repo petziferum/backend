@@ -14,5 +14,12 @@ public interface NodeRepository extends MongoRepository<Node, String> {
     @Query("{ 'parents' : null }")
     Optional<Question> findRoot();
 
-    List<Answer> findByParents(String questionName);
+    List<Answer> findByType(String type);
+
+    List<Question> findQuestionsByType(String type);
+
+         List<Answer> findByParents(String name);
+
+    List<Question> findNextQuestionByParents(String name);
+
 }
