@@ -9,6 +9,7 @@ import java.util.List;
 public interface PersonRepository extends MongoRepository<Person, String> {
 
     public Person findByFirstName(String firstName);
-    public List<Person> findByLastName(String lastName); //findBy ist die MongoDB Query und LastName muss ein getter in der Klasse sein
+    public List<Person> findThisFuckingUserByLastName(String lastName); //findBy ist die MongoDB Query und LastName muss ein getter in der Klasse sein Beispiel: find...By... z.B. findTheFuckingUserByFirstName
     public List<Person> findByAge(int age);
+    public List<Person> findAll();
 }

@@ -3,8 +3,10 @@ package com.petziferum.backend.controller;
 
 import com.petziferum.backend.model.Building;
 import com.petziferum.backend.model.Person;
+import com.petziferum.backend.model.Student;
 import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
+import com.petziferum.backend.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,34 @@ import java.util.List;
 
 @CrossOrigin(value = {"http://localhost:8080", "http://localhost:8010"})
 @RestController
+@RequestMapping("/p")
 public class PersonController  {
 
     @Autowired
     PersonRepository repo;
     @Autowired
     ConstructionRepo crepo;
+
+
+    private final PersonService personService;
+
+    @Autowired
+    public PersonController(PersonService personService){
+        this.personService = personService;
+    }
+
+    @GetMapping("/student")
+    public Student neuerStudent(){
+
+        Student peter = Student.erstelleStudent();
+                return peter;
+    }
+
+    @GetMapping("/listAllNames")
+    public Object controller(){
+        return personService.showNames();
+    }
+
     @CrossOrigin(value = {"http://localhost:8080", "http://localhost:8010"})
     @GetMapping("/allitems")
     public ResponseEntity getConstructionItems() {
@@ -40,7 +64,7 @@ public class PersonController  {
     }
     @GetMapping("/lastname")
     public ResponseEntity getPersonByLastName(@RequestParam String lastname){
-        List<Person> PersonList = repo.findByLastName(lastname);
+        List<Person> PersonList = repo.findThisFuckingUserByLastName(lastname);
         return ResponseEntity.ok(PersonList);
     }
 

@@ -14,9 +14,17 @@ public class Person {
     @Id
     private String id;
     private int age;
-    private final String firstName;
-    private final String lastName;
+    private String firstName;
+    private String lastName;
     private ArrayList<Skills> skills;
+
+    public Person() {
+    }
+
+    public Person(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Person(String firstName, String lastName, int age, ArrayList<Skills> skills){
         this.firstName = firstName;
@@ -39,6 +47,9 @@ public class Person {
 
     public ArrayList<Skills> getSkills() {
         return skills;
+    }
+    public void setSkills(ArrayList s){
+        this.skills = s;
     }
 
     public int getAge() {

@@ -8,6 +8,7 @@ public class HelloWorldController {
 
     @RequestMapping("/")
     public String sayHello() {
-        return "<h1>Hallo Petzi</h1><p>Hier gehts zu <a href='http://localhost:8010/swagger-ui.html'>Swagger-ui</a>";
+        return "<h1>Hallo Petzi</h1><p>Hier gehts zu <a href='http://localhost:8010/swagger-ui.html'>Swagger-ui</a><br>" +
+                "und hier wird ein Service ausgeführt.";
     }
 }
