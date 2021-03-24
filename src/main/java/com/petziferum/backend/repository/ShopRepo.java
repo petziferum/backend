@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface ShopRepo extends MongoRepository<Product, String> {
 
     public ArrayList<Product> findAll();
+
 }

@@ -1,10 +1,13 @@
 package com.petziferum.backend.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.petziferum.backend.model.Product;
 import com.petziferum.backend.repository.ShopRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,6 +53,43 @@ public class ShopController {
 
         ArrayList list = shoprepo.findAll();
         return list;
+    }
+
+    @GetMapping("/stream/text")
+    public ResponseEntity<StreamingResponseBody> streamData(){
+        StreamingResponseBody responseBody = response -> {
+            for (int i = 1; i <= 100; i++) {
+                try{
+                    Thread.sleep(1000);
+                    response.write(("Data Stream - " + i + "\n").getBytes());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body(responseBody);
+    }
+    @GetMapping("/stream/json")
+    public ResponseEntity<StreamingResponseBody> streamJson() {
+        int maxRecords = 10;
+        StreamingResponseBody responseBody = response -> {
+            for (int i = 1; i <= maxRecords; i++) {
+                Product st = new Product("Produkt " + i, "Glotzi");
+
+                ObjectMapper mapper = new ObjectMapper();
+                String jsonString = mapper.writeValueAsString(st) +"\n";
+                response.write(jsonString.getBytes());
+                response.flush();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_STREAM_JSON)
+                .body(responseBody);
     }
 
 }
