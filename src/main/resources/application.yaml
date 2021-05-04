@@ -1,0 +1,28 @@
+spring:
+  application:
+    admin: Petziferum
+    title: Backend-Sandbox
+    name: @project.artifactId@
+  banner:
+    location: banner.txt
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: PetziDB
+      repositories:
+        type: auto
+
+server:
+  port: 8081
+
+
+
+
+  #spring.data.mongodb.host=host.docker.internal
+  #spring.data.mongodb.host=localhost
+  #spring.data.mongodb.port=27017
+  #spring.data.mongodb.database=PetziDB
+  #spring.data.mongodb.repositories.type=auto
+  #spring.banner.location=banner.txt

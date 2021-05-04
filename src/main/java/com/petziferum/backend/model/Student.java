@@ -19,8 +19,10 @@ public class Student {
             return firstName;
         }
 
-        public static Student erstelleStudent(){
-            Student peter = new Student("Peter", "Lustig");
+        public static Student erstelleStudent(String f, String l){
+            String name = f;
+            String lastName = l;
+            Student peter = new Student(name, lastName);
             return peter;
         }
 }
