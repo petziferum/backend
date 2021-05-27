@@ -1,5 +1,8 @@
 package com.petziferum.backend.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "students")
 public class Student {
         String firstName;
         String lastName;
@@ -19,12 +22,10 @@ public class Student {
             return firstName;
         }
 
-        public static Student erstelleStudent(String f, String l){
-            String name = f;
-            String lastName = l;
-            Student peter = new Student(name, lastName);
-            return peter;
-        }
+    public static Student erstelleStudent(){
+        Student peter = new Student("Peter", "Lustig");
+        return peter;
+    }
 }
 
 

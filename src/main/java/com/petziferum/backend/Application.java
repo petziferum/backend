@@ -15,10 +15,7 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     public ConstructionRepo crepo;
-/*
-    @Autowired
-    InitService initService;
-*/
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

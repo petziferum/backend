@@ -2,13 +2,9 @@ package com.petziferum.backend.controller;
 
 import com.petziferum.backend.model.Building;
 import com.petziferum.backend.model.Person;
-import com.petziferum.backend.model.Student;
 import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
 import com.petziferum.backend.service.PersonService;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +28,7 @@ public class PersonController  {
     public PersonController(PersonService personService){
         this.personService = personService;
     }
-
+/*
     @GetMapping("/student")
     @ApiResponse(content = @Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))) //Als Rückgabewert wird hier "Student" deklariert, da in der Methode nur "Object" angegeben wurde und das sehr unspezifisch ist.
     public Object neuerStudent(@RequestParam String firstName, String lastName){
@@ -40,7 +36,7 @@ public class PersonController  {
         Student student = Student.erstelleStudent(firstName, lastName);
                 return  student;
     }
-
+*/
     @GetMapping("/listAllNames")
     public Object controller(){
         return personService.showNames();
