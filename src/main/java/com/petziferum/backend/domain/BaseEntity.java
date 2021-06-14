@@ -1,18 +1,50 @@
 package com.petziferum.backend.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.petziferum.backend.model.PersistentEntity;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
-import java.io.Serializable;
-import java.util.UUID;
+public abstract class BaseEntity implements PersistentEntity {
 
-@NoArgsConstructor
-@Getter
-@Setter
-public abstract class BaseEntity implements Cloneable, Serializable {
+    @Id
+    private String id;
+    private String name;
+    private String description;
 
-    private static final long serialVersionUID = 1L;
+    public BaseEntity() {
+        id = ObjectId.get().toHexString();
+    }
 
-    private UUID id;
+    public BaseEntity(String name, String description) {
+        id = ObjectId.get().toHexString();
+        this.name = name;
+        this.description = description;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }
