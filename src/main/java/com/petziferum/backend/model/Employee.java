@@ -36,7 +36,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getfirstName() {
+    public String getFirstName() {
         return this.firstName;
     }
 
@@ -66,6 +66,16 @@ public class Employee {
         Employee employee = (Employee) o;
         return Objects.equals(this.id, employee.id) && Objects.equals(this.firstName, employee.firstName)
                 && Objects.equals(this.role, employee.role);
+    }
+
+    public static Employee createEmployee(EmployeeDTO employeeDTO) {
+
+        Employee e = new Employee();
+        e.firstName = employeeDTO.getFirstName();
+        e.lastName = employeeDTO.getLastName();
+        e.role = employeeDTO.getRole();
+
+        return e;
     }
 
     @Override

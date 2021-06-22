@@ -1,22 +1,25 @@
 package com.petziferum.backend.controller;
 
 import com.petziferum.backend.model.Employee;
+import com.petziferum.backend.model.EmployeeDTO;
 import com.petziferum.backend.repository.EmployeeRepository;
+import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
-@RequestMapping("employees")
+@RequestMapping("/employees")
 public class EmployeeController {
-    private final EmployeeRepository repository;
 
-    EmployeeController(EmployeeRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private EmployeeRepository repository;
+    private String name;
 
     // Aggregate root
 
@@ -24,9 +27,20 @@ public class EmployeeController {
     List<Employee> all() {
         return repository.findAll();
     }
+
+    @GetMapping("/name")
+    public Employee getEmployeesSorted(@RequestParam String e) {
+        return repository.getEmployeeByFirstName(e);
+    }
+
     @PostMapping("/")
-    Employee newEmployee(@RequestBody Employee newEmployee) {
-        return repository.save(newEmployee);
+    public ResponseEntity<Employee> saveNewEmployee(@RequestBody EmployeeDTO newEmployee) {
+
+        Employee e =  Employee.createEmployee(newEmployee);
+
+        repository.save(e);
+
+        return ResponseEntity.ok(e);
     }
 
     // Single item
@@ -36,7 +50,18 @@ public class EmployeeController {
         return repository.findById(id)
                 .orElseThrow(() -> new FileNotFoundException(id));
     }
-    @RequestMapping(value = "/employees/{lastname}", produces = "application/json")
+
+    @GetMapping("/query/firstname")
+    public ResponseEntity<List<Employee>> queryFirstname(@RequestParam String firstname ){
+
+        String search = firstname.substring(0,1).toUpperCase(Locale.ROOT).concat(firstname.substring(1)); //Todo: Casesensitivity raus machen wenn möglich, damit man auch Kleingeschriebenes angezeigt bekommt
+
+        System.out.println(search);
+
+        return ResponseEntity.ok(repository.findEmployeeByFirstNameContaining(search));
+    }
+
+    @GetMapping(value = "/employees/{lastname}", produces = "application/json")
     public ResponseEntity employees(@RequestParam(value= "lastname") String lastname) throws Exception {
         List<Employee> employeelist =
             repository.findByLastName(lastname);
@@ -53,7 +78,7 @@ public class EmployeeController {
 
         return repository.findById(id)
                 .map(employee -> {
-                    employee.setfirstName(newEmployee.getfirstName());
+                    employee.setfirstName(newEmployee.getFirstName());
                     employee.setRole(newEmployee.getRole());
                     return repository.save(employee);
                 })
@@ -63,9 +88,18 @@ public class EmployeeController {
                 });
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/delete/id/{id}")
     void deleteEmployee(@PathVariable String id) {
         repository.deleteById(id);
+    }
+
+    @DeleteMapping("/delete/name/{firstname}")
+    void deleteEmployeeByName(@Parameter(description = "Search by Firstname of Employee")@PathVariable(value = "firstname") String name){
+        this.name = name;
+
+        System.out.println("wird gelöscht: " + name);
+
+        repository.deleteEmployeeByFirstName(name);
     }
 
 
