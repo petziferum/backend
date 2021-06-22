@@ -1,12 +1,17 @@
 package com.petziferum.backend.controller;
 
 import com.petziferum.backend.model.Conversation;
-import com.petziferum.backend.model.tree.*;
+import com.petziferum.backend.model.tree.Answer;
+import com.petziferum.backend.model.tree.Node;
+import com.petziferum.backend.model.tree.Question;
 import com.petziferum.backend.repository.tree.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +28,7 @@ public class TreeController extends CrudController<Node, NodeRepository> {
         Conversation node = new Conversation();
         node.setName(name);
         //Question quest = new Question("frage","eine Frage", "erste Frage", null, false);
-        List<Question> root = repository.findNextQuestionByParents(name);
+        List<Question> root = repository.findNextQuestion(name);
         Question q = root.get(0);
         System.out.println(q);
         //List<Answer> answer = repository.findByParents(q.getId());
@@ -34,8 +39,23 @@ public class TreeController extends CrudController<Node, NodeRepository> {
         return node;
     }
 
+    @GetMapping("/session")
+    public String process(Model model, HttpSession session) {
+        @SuppressWarnings("unchecked")
+        List<String> messages = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
+
+        if (messages == null) {
+            messages = new ArrayList<>();
+        }
+        model.addAttribute("sessionMessages", messages);
+        System.out.println(model + " " +  messages);
+
+        return "index";
+    }
+
     @GetMapping("/root")
     public ResponseEntity<Question> getRoot() {
+
         Optional<Question> node = repository.findRoot();
 
         if (node.isPresent()) {
@@ -93,10 +113,12 @@ public class TreeController extends CrudController<Node, NodeRepository> {
     }
 
     @GetMapping("/question/{id}")
-    public ResponseEntity<Node> getNextQuestionById(@PathVariable String id) {
+    public ResponseEntity<List> getNextQuestionById(@PathVariable String id) {
         if (repository.existsById(id)) {
-            Optional<Question> question = repository.findNextQuestion(id);
-            return ResponseEntity.ok(question.isPresent() ? question.get() : new TreeEnd());
+            List<Question> question = repository.findNextQuestion(id);
+
+            return ResponseEntity.ok(question);
+            //return ResponseEntity.ok(question.isPresent() ? question.get() : new TreeEnd());
         } else {
             return ResponseEntity.badRequest().build();
         }

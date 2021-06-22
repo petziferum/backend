@@ -12,4 +12,6 @@ public interface PersonRepository extends MongoRepository<Person, String> {
     public List<Person> findThisFuckingUserByLastName(String lastName); //findBy ist die MongoDB Query und LastName muss ein getter in der Klasse sein Beispiel: find...By... z.B. findTheFuckingUserByFirstName
     public List<Person> findByAge(int age);
     public List<Person> findAll();
+
+//    Page<Person> findById(String personId, Pageable pageable);
 }

@@ -1,5 +1,7 @@
 package com.petziferum.backend.model;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -66,5 +68,7 @@ public class Person {
     public void addSkill(Skills skills) {
         this.skills.add(skills);
     }
+
+    public Person(@Autowired ModelMapper mapper, final Person bw) { mapper.map(bw, this); }
 
 }

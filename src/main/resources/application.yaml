@@ -14,6 +14,10 @@ spring:
       repositories:
         type: auto
 
+  session:
+    store-type: mongodb
+    timeout.seconds: 60
+
 server:
   port: 8081
 

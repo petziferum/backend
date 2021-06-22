@@ -26,7 +26,7 @@ public interface NodeRepository extends MongoRepository<Node, String> {
     List<Answer> findAnswers(String question);
 
     @Query("{ '_class' : 'com.petziferum.backend.model.tree.Question', 'parents' : ?0 }")
-    Optional<Question> findNextQuestion(String answer);
+    List<Question> findNextQuestion(String answer);
 
 
 }
