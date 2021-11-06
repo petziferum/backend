@@ -4,6 +4,7 @@ package com.petziferum.backend.configuration;
 import com.petziferum.backend.model.*;
 import com.petziferum.backend.model.tree.Answer;
 import com.petziferum.backend.model.tree.Question;
+import com.petziferum.backend.model.tree.TreeNode;
 import com.petziferum.backend.repository.ConstructionRepo;
 import com.petziferum.backend.repository.PersonRepository;
 import com.petziferum.backend.repository.tree.NodeRepository;
@@ -33,15 +34,16 @@ public class InitService {
 
         public void answers(){
             String[] belongsto = {"root"};
-            Answer a = new Answer("info", "Ich brauche Informationen", "infotext", belongsto ,null,1);
-            Answer b = new Answer("reden", "Ich will nur reden", "nur reden", belongsto ,null,1);
-            noderepo.save(a);
-            noderepo.save(b);
+            Answer a = new Answer("info", "Ich brauche Informationen");
+            Answer b = new Answer("reden", "Ich will nur reden");
+            TreeNode n = new TreeNode().addAnswer(a).addAnswer(b);
+            noderepo.save(n);
         }
     public void Init() {
-        String[] p = {null};
-        Question q = new Question("root", "Wie kann ich dir helfen?", "Beginn", p, false);
-        noderepo.save(q);
+        ArrayList<String> p = new ArrayList<>();
+        Question q = new Question("root", "Wie kann ich dir helfen?", p);
+        TreeNode node = new TreeNode().addQuestion(q);
+        noderepo.save(node);
     }
 
 public void initPerson() {

@@ -2,7 +2,6 @@ package com.petziferum.backend.controller;
 
 import com.petziferum.backend.model.Conversation;
 import com.petziferum.backend.model.tree.Answer;
-import com.petziferum.backend.model.tree.Node;
 import com.petziferum.backend.model.tree.Question;
 import com.petziferum.backend.repository.tree.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tree")
-public class TreeController extends CrudController<Node, NodeRepository> {
+public class TreeController {
 
     @Autowired
     NodeRepository repository;
 
+    
     @GetMapping("/conversation")
     public Conversation getConversation(@RequestParam String name){
         Conversation node = new Conversation();
@@ -92,13 +92,12 @@ public class TreeController extends CrudController<Node, NodeRepository> {
     @PostMapping("/addquestion")
     public ResponseEntity addQuestion(@RequestBody Question question) {
         System.out.println("/n New Question posted: "+question);
-        repository.save(question);
+        //repository.save(question);
         return ResponseEntity.ok(question);
     }
     @PostMapping("/addanswer")
     public ResponseEntity<Answer> addAnswer(@RequestBody Answer answer){
-        System.out.print("/n Neue Antwort: " + answer.getName());
-        repository.save(answer);
+        //repository.save(answer);
         return ResponseEntity.ok(answer);
     }
     @GetMapping("/answers/{id}")
@@ -122,10 +121,5 @@ public class TreeController extends CrudController<Node, NodeRepository> {
         } else {
             return ResponseEntity.badRequest().build();
         }
-    }
-
-    @Override
-    public String provideEndpoint() {
-        return "/tree";
     }
 }

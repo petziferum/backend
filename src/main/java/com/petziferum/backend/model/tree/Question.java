@@ -1,33 +1,21 @@
 package com.petziferum.backend.model.tree;
 
-public class Question extends Node {
+import org.springframework.data.annotation.Id;
 
-    private boolean scalable;
+import java.util.ArrayList;
+
+public class Question {
+
+    @Id
+    private String id;
+    private String name;
     private String text;
-    private String type;
-    public Question() {}
+    private ArrayList<String> parents;
 
-    public Question(String name, String text, String description, String[] parents, boolean scalable) {
-        super(name, description, parents);
+    public Question(String name, String text, ArrayList<String> parents) {
+        this.name = name;
         this.text = text;
-        this.scalable = scalable;
-        this.type = "System";
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isScalable() {
-        return scalable;
-    }
-
-    public void setScalable(boolean scalable) {
-        this.scalable = scalable;
+        this.parents = parents;
     }
 
     public String getText() {

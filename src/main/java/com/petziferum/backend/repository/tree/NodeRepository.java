@@ -1,7 +1,7 @@
 package com.petziferum.backend.repository.tree;
 
 import com.petziferum.backend.model.tree.Answer;
-import com.petziferum.backend.model.tree.Node;
+import com.petziferum.backend.model.tree.TreeNode;
 import com.petziferum.backend.model.tree.Question;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface NodeRepository extends MongoRepository<Node, String> {
+public interface NodeRepository extends MongoRepository<TreeNode, String> {
 
     @Query("{ 'id' : root }")
     Optional<Question> findRoot();

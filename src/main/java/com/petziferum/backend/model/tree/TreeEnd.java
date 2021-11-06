@@ -1,6 +1,6 @@
 package com.petziferum.backend.model.tree;
 
-public class TreeEnd extends Node {
+public class TreeEnd extends TreeNode {
 
     private boolean finished = true;
 
