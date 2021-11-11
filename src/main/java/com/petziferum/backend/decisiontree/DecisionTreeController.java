@@ -26,7 +26,7 @@ public class DecisionTreeController {
 
     @GetMapping("/tree")
     public ResponseEntity<ArrayList<Conversation>> getConversations(@RequestParam String name) {
-        ArrayList<Conversation> cArray = new ArrayList<Conversation>();
+        ArrayList<Conversation> cArray;
         cArray = treeService.findConversation(name);
         return ResponseEntity.ok(cArray);
 
