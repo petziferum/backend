@@ -14,6 +14,9 @@ public class DecisionTreeController {
     @Autowired
     DecisionTreeRepository dtrepo;
 
+    @Autowired
+    private TreeService treeService;
+
 
     @PostMapping("/postconversation")
     public ResponseEntity<Conversation> postConversation(@RequestBody Conversation c) {
@@ -24,19 +27,7 @@ public class DecisionTreeController {
     @GetMapping("/tree")
     public ResponseEntity<ArrayList<Conversation>> getConversations(@RequestParam String name) {
         ArrayList<Conversation> cArray = new ArrayList<Conversation>();
-        Conversation frage = dtrepo.findConversationByName(name);
-        cArray.add(frage);
-
-        System.out.println("size: "+frage.children.size());
-        System.out.println("childs: " + frage.children);
-        for(int i = 0; i < frage.children.size(); i++) {
-            Conversation antwort = dtrepo.findConversationByName(frage.children.get(i));
-            System.out.println("i" + i + " antwort: " + antwort);
-            if(antwort == null) {
-                i++;
-            } else cArray.add(antwort);
-        }
-        System.out.println("cArray: " + cArray);
+        cArray = treeService.findConversation(name);
         return ResponseEntity.ok(cArray);
 
     }
