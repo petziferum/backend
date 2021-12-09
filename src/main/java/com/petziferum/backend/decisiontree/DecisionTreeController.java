@@ -1,5 +1,6 @@
 package com.petziferum.backend.decisiontree;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +39,13 @@ public class DecisionTreeController {
         Conversation frage = dtrepo.findConversationByName(name);
 
         return ResponseEntity.ok(frage);
+    }
+
+    @ApiResponse(description = "Gibt eine Frage oder Antwort zurück")
+    @GetMapping("/frageByName/{name}")
+    public ResponseEntity<Conversation> getFrageByName(@PathVariable("name") String name) {
+        final Conversation frageFound = dtrepo.findConversationByName(name);
+
+        return new ResponseEntity<>(frageFound, HttpStatus.FOUND);
     }
 }
