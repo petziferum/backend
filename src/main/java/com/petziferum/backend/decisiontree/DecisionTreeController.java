@@ -21,7 +21,11 @@ public class DecisionTreeController {
 
     @PostMapping("/postconversation")
     public ResponseEntity<Conversation> postConversation(@RequestBody Conversation c) {
-        dtrepo.save(c);
+        Conversation con = Conversation.builder().children(c.children).name(c.name)
+                .text(c.text)
+                .type(c.type)
+                .build();
+        dtrepo.save(con);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
