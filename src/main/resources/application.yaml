@@ -6,14 +6,14 @@ spring:
   banner:
     location: banner.txt
 
-  data:
-    mongodb:
+  #data:
+    #mongodb:
       #uri: "mongodb+srv://admin:petziferum@petzicluster.s13yq.mongodb.net/test"
-      host: localhost
-      port: 2717
-      database: PetziDB
-      repositories:
-        type: auto
+      #host: localhost
+      #port: 2717
+      #database: PetziDB
+      #repositories:
+      #  type: auto
 
   session:
     store-type: mongodb

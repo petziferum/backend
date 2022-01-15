@@ -1,4 +1,9 @@
 spring:
+  application:
+    title: Local-Sandbox
+  banner:
+    location: local.txt
+
   data:
     mongodb:
       host: localhost
@@ -6,3 +11,7 @@ spring:
       database: PetziDB
       repositories:
         type: auto
+
+  session:
+    store-type: mongodb
+    timeout.seconds: 60
