@@ -8,8 +8,9 @@ spring:
 
   data:
     mongodb:
+      #uri: "mongodb+srv://admin:petziferum@petzicluster.s13yq.mongodb.net/test"
       host: localhost
-      port: 27017
+      port: 2717
       database: PetziDB
       repositories:
         type: auto

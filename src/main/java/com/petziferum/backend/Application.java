@@ -10,6 +10,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 
@@ -38,6 +41,13 @@ public class Application implements CommandLineRunner {
     @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true) // Scheduling wird hier eingestellt
     class SchedulingConfiguration {
 
+    }
+
+    @RequestMapping("/")
+    public ModelAndView sayHello(ModelMap model) {
+
+        model.addAttribute("attribute", "redirectWithRedirectPrefix");
+        return new ModelAndView("redirect:/swagger-ui.html", model);
     }
 
     @Override

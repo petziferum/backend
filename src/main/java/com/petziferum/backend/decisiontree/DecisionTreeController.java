@@ -42,7 +42,7 @@ public class DecisionTreeController {
     //Diese Methode Ruft die Jokeapi auf und speichert den Witz in einer "Joke" Klasse im Attribut text
     //andere formen sind auf der Api Seite auch noch möglich
     //Dann wird die "postJoke" Methode aufgerufen mit der der Joke in der eigenen Datenbank gespeichert wird.
-    @Scheduled(initialDelay = 1000, fixedRate = 30000L)
+    @Scheduled(initialDelay = 1000, fixedRate = 100000L)
     void info() {
         String chuckUrl = "https://v2.jokeapi.dev/joke/Any?format=txt";
         RestTemplate rest = new RestTemplate();
