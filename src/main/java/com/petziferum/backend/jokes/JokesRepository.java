@@ -4,4 +4,7 @@ import com.petziferum.backend.decisiontree.DecisionTreeController;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface JokesRepository extends MongoRepository<DecisionTreeController.Joke, String> {
+
+
+    //Jokes werden aktuell noch im decisionTreeController abgerufen und gespeichert
 }
