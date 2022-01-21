@@ -93,4 +93,18 @@ public class DecisionTreeController {
 
         return new ResponseEntity<>(frageFound, HttpStatus.FOUND);
     }
+
+    @GetMapping("/searchquestion")
+    public ResponseEntity<ArrayList<Conversation>> searchQuestionByName(@RequestParam String name) {
+        log.info("suche nach {}", name);
+        ArrayList<Conversation> result = dtrepo.getConversationByTypeEqualsAndNameContains(Type.QUESTION, name);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/searchanswer")
+    public ResponseEntity<ArrayList<Conversation>> searchAnswerByName(@RequestParam String name) {
+        log.info("suche nach Antwort {}", name);
+        ArrayList<Conversation> result = dtrepo.getConversationByTypeEqualsAndNameContains(Type.ANSWER, name);
+        return ResponseEntity.ok(result);
+    }
 }

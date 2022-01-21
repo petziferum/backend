@@ -14,14 +14,20 @@ public class TreeService {
     public ArrayList<Conversation> findConversation(String name) {
         System.out.println("findConv " + name);
         ArrayList<Conversation> cArray = new ArrayList<Conversation>();
-        Conversation frage = dtrepo.findConversationByName(name);
+        Conversation frage;
+        if(name.equals("")){
+            frage = dtrepo.findConversationByName("start");
+        }else {
+            frage = dtrepo.findConversationByName(name);
+        }
         if(frage != null) {
             System.out.println("frage: "+ frage);
             cArray.add(frage);
+            findAnswers(cArray, frage);
         } else {
             System.out.print("Nichts gefunden");
         }
-        findAnswers(cArray, frage);
+
 
         return cArray;
 
