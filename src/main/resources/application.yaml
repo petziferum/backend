@@ -14,6 +14,13 @@ spring:
       #database: PetziDB
       #repositories:
       #  type: auto
+  #data:
+   # mongodb:
+    #  host: localhost
+     # port: 27017
+      #database: PetziDB
+      #repositories:
+      #  type: auto
 
   session:
     store-type: mongodb
