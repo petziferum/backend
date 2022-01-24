@@ -40,12 +40,10 @@ public class Application implements CommandLineRunner {
     @EnableScheduling // Hier wird Scheduling eingeschaltet
     @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true) // Scheduling wird hier eingestellt
     class SchedulingConfiguration {
-
     }
 
     @RequestMapping("/")
     public ModelAndView sayHello(ModelMap model) {
-
         model.addAttribute("attribute", "redirectWithRedirectPrefix");
         return new ModelAndView("redirect:/swagger-ui.html", model);
     }
